@@ -23,8 +23,8 @@ function renderCountryList(country) {
     } else {
         markup = country.map((unit) => {
             return `<li>
-        <img src = ${unit.flags.svg} alt="" width="200px" heigth="100px">
-          <b>Name</b>: ${unit.name.official}
+        <img src = ${unit.flags.svg} alt="" width="24px" heigth="24px">
+         ${unit.name.official}
         </li>`
         })
     }
