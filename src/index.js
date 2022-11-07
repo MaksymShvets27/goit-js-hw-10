@@ -12,7 +12,7 @@ function renderCountryList(country) {
         markup = country.map((unit) => {
             console.log(unit);
             return `<li>
-        <img src = ${unit.flags.svg} alt="" width="200px" heigth="100px">
+        <img src = ${unit.flags.svg} alt="" width="200px" height="100px">
           <p><b>Name</b>: ${unit.name.official}</p>
           <p><b>Capital</b>: ${unit.capital}</p>
           <p><b>Population</b>: ${unit.population}</p>
@@ -23,7 +23,7 @@ function renderCountryList(country) {
     } else {
         markup = country.map((unit) => {
             return `<li>
-        <img src = ${unit.flags.svg} alt="" width="24px" heigth="24px">
+        <img src = ${unit.flags.svg} alt="" width="24px" height="24px">
          ${unit.name.official}
         </li>`
         })
@@ -31,10 +31,10 @@ function renderCountryList(country) {
     infoRef.insertAdjacentHTML("beforeend", markup);
 }
 
-inputRef.addEventListener("input", _.debounce((event) => {
+inputRef.addEventListener("input", _.debounce(((event) => {
     infoRef.textContent = "";
-    let input = event.target.value.trim();
-    fetchCountries(`${event.target.value}`)
+    // let input = event.target.value;
+    (fetchCountries(`${event.target.value}`)
         .then((data) => {
             if (data.length >= 10) {
                 Notiflix.Notify.info("Too many matches found. Please enter a more specific name.");
@@ -42,5 +42,7 @@ inputRef.addEventListener("input", _.debounce((event) => {
                 return renderCountryList(data)
             }
         })
-        .catch((error) => Notiflix.Notify.failure("Oops, there is no country with that name"));
-}), DEBOUNCE_DELAY);
+        .catch((error) => Notiflix.Notify.failure("Oops, there is no country with that name"))
+    )
+}), DEBOUNCE_DELAY)
+)
